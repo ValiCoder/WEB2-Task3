@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.send('Go to /register to create an account or /login to sign in.'); // sendMessage → send
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/register', (req, res) => {

@@ -3,6 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Page</title>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div id="userData">
+            <!-- User data will be dynamically inserted here -->
+        </div>
+        <a href="/" class="logout-link">Logout</a>
+    </div>
     
+    <script>
+        // This script will run when redirected from login
+        // It extracts user ID from URL and fetches data
+        const pathParts = window.location.pathname.split('/');
+        const userId = pathParts[pathParts.length - 1];
+        
+        if (userId && userId !== 'user.html') {
+            fetch(`/user/${userId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('userData').innerHTML = html;
+                })
+                .catch(error => {
+                    document.getElementById('userData').innerHTML = 
+                        '<p class="error">Error loading user data</p>';
+                });
+        }
+    </script>
+</body>
 </html>
